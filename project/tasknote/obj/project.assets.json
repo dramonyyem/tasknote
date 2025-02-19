@@ -3961,11 +3961,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/daramony/tasknote/tasknote.csproj",
+      "projectUniqueName": "/home/daramony/Desktop/tasknote-project/project/tasknote/tasknote.csproj",
       "projectName": "tasknote",
-      "projectPath": "/home/daramony/tasknote/tasknote.csproj",
+      "projectPath": "/home/daramony/Desktop/tasknote-project/project/tasknote/tasknote.csproj",
       "packagesPath": "/home/daramony/.nuget/packages/",
-      "outputPath": "/home/daramony/tasknote/obj/",
+      "outputPath": "/home/daramony/Desktop/tasknote-project/project/tasknote/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/daramony/.nuget/NuGet/NuGet.Config"

@@ -29,16 +29,14 @@
         </v-card-item>
     </v-card>
         <v-row 
-            style="width: 1000px;"
+            style="width: 100%;"
             class="mx-auto my-8"
             >
             <v-col
                 v-for="item in responseNoteData"
                 :key="item.noteId"
-                lg="6"
-                
-                sm="12"
-            >
+                cols="6"
+                >
                 <v-card
                     @mouseover="hover = item.noteId"
                     @mouseleave="hover = null"
@@ -76,6 +74,7 @@ import { defineComponent, ref } from 'vue'
 import axios from 'axios';
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router';
+
 
 
 export default defineComponent({

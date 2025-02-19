@@ -3,12 +3,29 @@
         <v-btn to="/note/create" block>Add Note</v-btn>
     </div>
     <div class="mx-auto" style="width: 100%;">
+        
+        <v-card
+            class="mt-2 px-2 pt-2"
+        >
+            <v-text-field
+                label="Search Title"
+                v-model="search"
+            >
+            
+
+            </v-text-field>
+            <v-btn class="mx-2 my-2" @click="sortbyDesc">
+                Sort By DESC 
+            </v-btn>
+            <v-btn class="mx-2 my-2" @click="sortbyAsc">
+                Sort By ASC 
+            </v-btn>
+        </v-card>
         <v-row
             class="mx-auto my-8"
             >
             <v-col
-                v-for="item in responseData"
-                :key="item.noteId"
+                v-for="item in searchData"
                 cols="6"
             >
                 <v-card
@@ -37,15 +54,24 @@
 </template>
 <script lang="ts">
 import axios from 'axios';
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router';
+
+interface Note {
+    noteId: number;
+    title: string;
+    content: string;
+    createdAt: string;
+    updatedAt: string;
+}
 
 export default defineComponent({
     name: 'NoteList',
     setup () {
-        const responseData = ref([]);
+        const responseData = ref<Note[]>([]); // should create interface or class for assign specificate value
         const router = useRouter();
         const hover = ref<number | null>(null);
+        const search = ref('');
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://localhost:5001/api/notes",{ 
@@ -53,7 +79,6 @@ export default defineComponent({
                         'Authorization' : 'Bearer testing-token',
                     }
                 });
-
                 responseData.value = response.data;
             } catch (error) {
                 
@@ -63,6 +88,18 @@ export default defineComponent({
         const checkId = (id : number) => {
             alert(id);
         }
+
+        const searchData = computed(() => {
+            if (search.value === '') {
+                return responseData.value; // Return all data if search is empty
+            }
+            return responseData.value.filter((item) => {
+                const title = item.title ? item.title.toLowerCase() : '';
+                // Perform a case-insensitive search on both title and content
+                return title.toLowerCase().includes(search.value.toLowerCase());
+            });
+        });
+
 
         const formatDateTime = (str : string) => {
             const date = new Date(str);
@@ -79,13 +116,24 @@ export default defineComponent({
             router.push({ name: 'NoteDetail', params: { id } });
 
         }
+
+        const sortbyDesc = () => {
+            return searchData.value.sort((a, b) => b.noteId - a.noteId);
+        }
+        const sortbyAsc = () => {
+            return searchData.value.sort((a, b) => a.noteId - b.noteId);
+        }
         fetchData();
         return {
             fetchData,
             responseData,
             hover,
             formatDateTime,
-            messageData
+            messageData,
+            search,
+            searchData,
+            sortbyDesc,
+            sortbyAsc
         }
     }
 })

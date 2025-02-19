@@ -14,7 +14,7 @@
       </v-card-subtitle>
   
       <v-card-text>
-        {{ responseData?.content || 'Loading content...' }}
+        {{ responseData.content || 'Loading content...' }}
       </v-card-text>
   
       <v-card-actions style="padding-top: 300px;">
@@ -30,19 +30,16 @@
   import axios from 'axios';
   import { useRoute, useRouter } from 'vue-router'
   
+  interface Note {
+      noteId: number;
+      title: string;
+      content: string;
+      createdAt: string;
+      updatedAt: string;
+  }
+  
   // Date formatting function (same as before)
-  const formatDateTime = (str: string) => {
-    const date = new Date(str);
-    return (
-      date.getFullYear() +
-      '-' + String(date.getMonth() + 1).padStart(2, '0') +
-      '-' + String(date.getDate()).padStart(2, '0') +
-      ' ' + String(date.getHours()).padStart(2, '0') +
-      ':' + String(date.getMinutes()).padStart(2, '0') +
-      ':' + String(date.getSeconds()).padStart(2, '0') +
-      '.' + String(date.getMilliseconds()).padStart(3, '0')
-    );
-  };
+  
   
   export default defineComponent({
     name: 'NoteDetail',
@@ -50,8 +47,7 @@
       const route = useRoute();
       const router = useRouter();
       let noteId = route.params.id;
-      const responseData = ref([]);
-  
+      const responseData = ref<Note[]>([]);  
       // Fetch the note data
       const getNote = async () => {
         try {
@@ -66,6 +62,20 @@
           console.error('Error fetching note:', error);
         }
       };
+
+
+      const formatDateTime = (str: string) => {
+      const date = new Date(str);
+      return (
+        date.getFullYear() +
+        '-' + String(date.getMonth() + 1).padStart(2, '0') +
+        '-' + String(date.getDate()).padStart(2, '0') +
+        ' ' + String(date.getHours()).padStart(2, '0') +
+        ':' + String(date.getMinutes()).padStart(2, '0') +
+        ':' + String(date.getSeconds()).padStart(2, '0') +
+        '.' + String(date.getMilliseconds()).padStart(3, '0')
+      );
+    };
   
       // Delete the note
       const deleteNote = async () => {

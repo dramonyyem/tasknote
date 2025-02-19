@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tasknote")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d05f0189a354a6e6a0cf18f0cb332e754ddd906")]
 [assembly: System.Reflection.AssemblyProductAttribute("tasknote")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tasknote")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

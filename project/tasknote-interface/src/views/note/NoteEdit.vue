@@ -2,7 +2,6 @@
     <v-card                     
         elevation="16"
         class="mx-auto"
-        width="400"
         min-height="500"
         title="Note"
         subtitle="Edit"
